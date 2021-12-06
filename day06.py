@@ -64,7 +64,7 @@ class EffiecientSea:
         self._create_fish_interval_days()
 
     def add_fish(self, interval: int):
-        self.interval_days[interval] = self.interval_days[interval] + 1
+        self.interval_days[interval] += 1
 
     def _create_fish_interval_days(self):
         for _ in range(NEW_BORN_INTERVAL + 1):
