@@ -2,7 +2,7 @@ from dataclasses import dataclass, field
 from typing import Deque, Iterator
 from collections import deque
 
-FILENAME = r"C:\Users\Dave\Documents\VsWorkspace\advent_of_code\year2021\day6_data.txt"
+FILENAME = "day6_data.txt"
 
 
 NEW_BORN_INTERVAL = 8
