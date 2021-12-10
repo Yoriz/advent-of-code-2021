@@ -3,10 +3,10 @@ from dataclasses import astuple, dataclass, InitVar, field, astuple
 from itertools import cycle
 
 
-FILENAME = "day8_data.txt"
+FILENAME = r"C:\Users\Dave\Documents\VsWorkspace\advent_of_code\year2021\day8_data.txt"
 
 
-def yield_data(filename: str) -> Iterator[str]:
+def iter_data(filename: str) -> Iterator[str]:
     with open(file=filename, mode="r") as read_file:
         for line in read_file:
             yield line.strip()
@@ -44,13 +44,23 @@ class Display:
         return self.segments_count() == other.segments_count()
 
     def __str__(self) -> str:
+        segmant_number = f" No. {self.number if self.number is not None else ''}"
         segmanta = f" {self.a*4} "
         segmentbc = f"{self.b}    {self.c}"
         segmentd = f" {self.d*4} "
         segmentef = f"{self.e}    {self.f}"
         segmentg = f" {self.g*4} "
         return "\n".join(
-            (segmanta, segmentbc, segmentbc, segmentd, segmentef, segmentef, segmentg)
+            (
+                segmant_number,
+                segmanta,
+                segmentbc,
+                segmentbc,
+                segmentd,
+                segmentef,
+                segmentef,
+                segmentg,
+            )
         )
 
 
@@ -82,11 +92,13 @@ DISPLAYS = [
 
 @dataclass
 class Entry:
+    line: str
     unique_displays: list[Display] = field(default_factory=list)
     output_displays: list[Display] = field(default_factory=list)
 
 
 TEST_ENTRY = Entry(
+    line="",
     unique_displays=[
         Display(input=input)
         for input in (
@@ -108,16 +120,17 @@ TEST_ENTRY = Entry(
 )
 
 
-def get_entrys(data: Iterator[str]) -> list[Entry]:
+def iter_entrys(data: Iterator[str]) -> Iterator[Entry]:
     entrys: list[Entry] = []
     for line in data:
         unique_displays, output_displays = line.split("|")
         entry = Entry(
+            line=line,
             unique_displays=[Display(input=input) for input in unique_displays.split()],
             output_displays=[Display(input=input) for input in output_displays.split()],
         )
         entrys.append(entry)
-    return entrys
+        yield entry
 
 
 def get_display_convertor(entry: Entry) -> dict[Display, Display]:
@@ -191,8 +204,8 @@ def get_display_convertor(entry: Entry) -> dict[Display, Display]:
 
 
 def part_one(filename: str) -> None:
-    data = yield_data(filename)
-    entrys = get_entrys(data)
+    data = iter_data(filename)
+    entrys = iter_entrys(data)
     count = 0
     for entry in entrys:
         for display in entry.output_displays:
@@ -207,8 +220,8 @@ def part_one(filename: str) -> None:
 
 
 def part_two(filename: str) -> None:
-    data = yield_data(filename)
-    entrys = get_entrys(data)
+    data = iter_data(filename)
+    entrys = iter_entrys(data)
     count = 0
     for entry in entrys:
         number = ""
