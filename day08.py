@@ -3,7 +3,7 @@ from dataclasses import astuple, dataclass, InitVar, field, astuple
 from itertools import cycle
 
 
-FILENAME = r"C:\Users\Dave\Documents\VsWorkspace\advent_of_code\year2021\day8_data.txt"
+FILENAME = "day8_data.txt"
 
 
 def iter_data(filename: str) -> Iterator[str]:
