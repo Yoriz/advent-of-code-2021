@@ -106,13 +106,12 @@ class MainFrame(tk.Frame):
         unique_displays = current_entry.unique_displays[:]
         for index, display in enumerate(unique_displays):
             unique_displays[index] = convertor[display]
-            self.unique_displays.update_displays(unique_displays)
-        
+        self.unique_displays.update_displays(unique_displays)
+
         output_displays = current_entry.output_displays[:]
         for index, display in enumerate(output_displays):
             output_displays[index] = convertor[display]
-            self.output_displays.update_displays(unique_displays)
-        
+        self.output_displays.update_displays(unique_displays)
 
 
 def main():
