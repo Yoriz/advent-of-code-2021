@@ -50,6 +50,7 @@ class MainFrame(tk.Frame):
         self.octopus_grid = day11.OctopusGrid(octopuses=octopuses, grid_size=grid_size)
         self.update_grid_display(self.octopus_grid)
         self.step = 0
+        self.updating_flash_step = False
 
     def update_grid_display(self, octopus_grid: day11.OctopusGrid) -> None:
         self.grid_display.update_all(octopus_grid=octopus_grid)
@@ -58,16 +59,20 @@ class MainFrame(tk.Frame):
         self.step_label.config(text=text)
 
     def flash_step(self) -> None:
+        self.updating_flash_step = True
         octopuses_wanting_to_flash = self.octopus_grid.octopuses_wanting_to_flash()
         if not octopuses_wanting_to_flash:
             self.octopus_grid.reset_octopuses_if_flashed()
             self.update_grid_display(self.octopus_grid)
+            self.updating_flash_step = False
             return None
         self.octopus_grid.flash_octopuses(octopuses_wanting_to_flash)
         self.update_grid_display(self.octopus_grid)
         self.after(500, self.flash_step)
 
     def on_button_next_step(self, event):
+        if self.updating_flash_step:
+            return
         self.step += 1
         self.update_step_label(text=f"Step: {self.step}")
         self.octopus_grid.step()
