@@ -44,7 +44,7 @@ class Display:
         return self.segments_count() == other.segments_count()
 
     def __str__(self) -> str:
-        segmant_number = f" No. {self.number if self.number is not None else ''}"
+        segmant_number = f" No.{self.number if self.number is not None else ''}"
         segmanta = f" {self.a*4} "
         segmentbc = f"{self.b}    {self.c}"
         segmentd = f" {self.d*4} "
