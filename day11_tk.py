@@ -27,7 +27,8 @@ class GridDisplay(tk.Frame):
     def update_all(self, octopus_grid: day11.OctopusGrid) -> None:
         for label_row, octopus_row in zip(self.labels, octopus_grid.octopuses):
             for label, octopus in zip(label_row, octopus_row):
-                label.config(text=octopus.energy_level)
+                colour = "green" if octopus.flashed else "black"
+                label.config(text=octopus.energy_level, foreground=colour)
 
 
 class MainFrame(tk.Frame):
