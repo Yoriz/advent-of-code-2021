@@ -3,7 +3,6 @@ from dataclasses import dataclass
 
 
 FILENAME = "day16_data.txt"
-)
 
 
 def iter_data(filename: str) -> Iterator[str]:
