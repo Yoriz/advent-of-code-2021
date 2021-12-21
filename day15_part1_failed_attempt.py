@@ -4,7 +4,6 @@ from queue import PriorityQueue
 
 
 FILENAME = "day15_data.txt"
-)
 
 
 def iter_data(filename: str) -> Iterator[str]:
