@@ -4,7 +4,6 @@ from collections import Counter
 from itertools import tee
 
 FILENAME = "day14_data.txt"
-)
 
 
 def iter_data(filename: str) -> Iterator[str]:
